@@ -25,6 +25,7 @@ jobs:
           username: ubuntu
           key_path: key.pem
           port: 22
+          sync: true
           script: |
             cd /home/ubuntu/nodejs-deloy-githubactions
             git pull origin main
