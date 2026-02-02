@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-    res.send("Node.js app running on EC2 🚀 with changes new");
+    res.send("Node.js app running on EC2 🚀 with changes today");
 });
 
 app.get("/health", (req, res) => {
