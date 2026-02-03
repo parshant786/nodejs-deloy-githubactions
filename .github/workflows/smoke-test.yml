@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   smoke-test:
     runs-on: ubuntu-latest
     steps:
       - name: Simple Echo
-        run: echo "GitHub Actions are working!"
+        run: echo "GitHub Actions are manual or push triggered!"
