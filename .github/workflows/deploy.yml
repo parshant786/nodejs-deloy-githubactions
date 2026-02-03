@@ -51,4 +51,6 @@ jobs:
           script: |
             cd /home/ubuntu/nodejs-deloy-githubactions
             git pull origin main
+            export APMINSIGHT_LICENSE_KEY="${{ secrets.APMINSIGHT_LICENSE_KEY }}"
+            export APMINSIGHT_APP_NAME="appcidemo-main"
             docker compose up -d --build
