@@ -1,0 +1,13 @@
+name: Smoke Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simple Echo
+        run: echo "GitHub Actions are working!"
