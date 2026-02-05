@@ -56,4 +56,6 @@ jobs:
             git pull origin main
             export APMINSIGHT_LICENSE_KEY="${{ secrets.APMINSIGHT_LICENSE_KEY }}"
             export APMINSIGHT_APP_NAME="appcidemo-main"
+            export MONGODB_URI="${{ secrets.MONGODB_URI }}"
+            export NODE_ENV="main"
             docker compose up -d --build

@@ -10,3 +10,10 @@ services:
       - APMINSIGHT_LICENSE_KEY=${APMINSIGHT_LICENSE_KEY}
       - APMINSIGHT_APP_NAME=${APMINSIGHT_APP_NAME:-appcidemo-local}
       - APMINSIGHT_APP_PORT=${APMINSIGHT_APP_PORT:-8080}
+
+  cron:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run cron
+    restart: unless-stopped
