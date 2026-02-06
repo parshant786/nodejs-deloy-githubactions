@@ -1,3 +1,5 @@
+require('dotenv').config();
+require('apminsight');
 const express = require("express");
 const { connectDB, closeDB } = require('./db');
 const userService = require('./services/userService');

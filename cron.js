@@ -1,6 +1,13 @@
+require('dotenv').config();
 const cron = require('node-cron');
+const { connectDB, closeDB } = require('./db');
 
 console.log('Cron service started...');
+
+// In production, we usually want DB connection for cron jobs
+if (require.main === module) {
+    connectDB();
+}
 
 // Example Job: Runs every minute
 // In production, replace this with your actual business logic
@@ -23,14 +30,16 @@ const task = cron.schedule('* * * * *', () => {
 console.log('Cron job scheduled: Every minute');
 
 // Graceful shutdown handling
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
     console.log('SIGTERM signal received: closing cron service');
     task.stop();
+    await closeDB();
     process.exit(0);
 });
 
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
     console.log('SIGINT signal received: closing cron service');
     task.stop();
+    await closeDB();
     process.exit(0);
 });
