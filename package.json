@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "cron": "node cron.js",
+    "start:pm2": "pm2 start ecosystem.config.js --only app",
+    "cron:pm2": "pm2 start ecosystem.config.js --only cron",
     "test": "jest",
     "lint": "eslint .",
     "audit": "npm audit"
@@ -17,7 +19,8 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongoose": "^9.1.6",
-    "node-cron": "^4.2.1"
+    "node-cron": "^4.2.1",
+    "pm2": "^6.0.14"
   },
   "devDependencies": {
     "eslint": "^9.19.0",

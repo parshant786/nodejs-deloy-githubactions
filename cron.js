@@ -9,18 +9,22 @@ if (require.main === module) {
     connectDB();
 }
 
+const User = require('./models/User');
+
 // Example Job: Runs every minute
 // In production, replace this with your actual business logic
-const task = cron.schedule('* * * * *', () => {
+const task = cron.schedule('* * * * *', async () => {
     const timestamp = new Date().toISOString();
     console.log(`[${timestamp}] Cron job executed successfully.`);
 
-    // Logic goes here...
-    // try {
-    //   await performCalculations();
-    // } catch (error) {
-    //   console.error('Job failed:', error);
-    // }
+    try {
+        const totalUsers = await User.countDocuments();
+        const adminCount = await User.countDocuments({ role: 'admin' });
+
+        console.log(`[${timestamp}] DB Stats -> Total Users: ${totalUsers}, Admins: ${adminCount}`);
+    } catch (error) {
+        console.error(`[${timestamp}] Job failed logic:`, error.message);
+    }
 }, {
     scheduled: true,
     timezone: "UTC"

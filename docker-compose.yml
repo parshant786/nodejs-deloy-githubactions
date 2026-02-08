@@ -3,9 +3,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: unless-stopped
     ports:
       - "8080:8080"
+    command: pm2-runtime start ecosystem.config.js --only app --watch
+    restart: unless-stopped
+    volumes:
+      - ./:/app
+      - /app/node_modules
     environment:
       - APMINSIGHT_LICENSE_KEY=${APMINSIGHT_LICENSE_KEY}
       - APMINSIGHT_APP_NAME=${APMINSIGHT_APP_NAME:-appcidemo-local}
@@ -17,8 +21,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: npm run cron
+    command: pm2-runtime start ecosystem.config.js --only cron --watch
     restart: unless-stopped
+    volumes:
+      - ./:/app
+      - /app/node_modules
     environment:
       - APMINSIGHT_LICENSE_KEY=${APMINSIGHT_LICENSE_KEY}
       - APMINSIGHT_APP_NAME=${APMINSIGHT_APP_NAME:-appcidemo-cron}
